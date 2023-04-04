@@ -4,9 +4,13 @@ sequenceDiagram
     participant Browser
     participant Server
     User->>Browser: Submit input;
-    Browser->>Server: Send user input to server;
-    Server->>Browser: Server asks browser to reload the notes page;
-    Browser->>Server: Asks to fetch stylesheet, JS code and data;
-    Server->>Browser: Sends data;
+    Browser->>Server: POST studies.cs.helsinki.fi/exampleapp/new_note;
+    Server->>Browser: URL redirect to /notes;
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/main.css;
+    Server-->>Browser: Sends CSS file;
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/main.js;
+    Server-->>Browser: Sends JS file;
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/data.json;
+    Server-->>Browser: Sends data file;
     Browser->>User: Loads new page;
         
